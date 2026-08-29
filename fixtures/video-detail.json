@@ -1,0 +1,44 @@
+{
+  "observations": [
+    {
+      "stage": "response",
+      "request": {
+        "method": "GET",
+        "url": "https://api.bilibili.com/x/web-interface/view?bvid=BV1y3N56fEgz",
+        "host": "api.bilibili.com",
+        "path": "/x/web-interface/view",
+        "headers": {}
+      },
+      "response": {
+        "statusCode": 200,
+        "headers": {"Content-Type": ["application/json; charset=utf-8"]},
+        "contentType": "application/json; charset=utf-8",
+        "body": "{\"code\":0,\"message\":\"0\",\"data\":{\"bvid\":\"BV1y3N56fEgz\",\"aid\":123456789,\"cid\":987654321,\"title\":\"示例 Bilibili 视频\",\"pic\":\"https://i0.hdslb.com/bfs/archive/example.jpg\",\"duration\":125,\"owner\":{\"name\":\"示例 UP 主\"},\"pages\":[{\"cid\":987654321,\"page\":1,\"part\":\"正片\",\"duration\":125}]}}"
+      }
+    },
+    {
+      "stage": "response",
+      "request": {
+        "method": "GET",
+        "url": "https://api.bilibili.com/x/player/wbi/playurl?bvid=BV1y3N56fEgz&cid=987654321&qn=80&fnval=4048",
+        "host": "api.bilibili.com",
+        "path": "/x/player/wbi/playurl",
+        "headers": {"Referer": ["https://www.bilibili.com/video/BV1y3N56fEgz/"]}
+      },
+      "response": {
+        "statusCode": 200,
+        "headers": {"Content-Type": ["application/json"]},
+        "contentType": "application/json",
+        "body": "{\"code\":0,\"message\":\"0\",\"data\":{\"quality\":80,\"dash\":{\"duration\":125,\"video\":[{\"id\":80,\"baseUrl\":\"https://upos-sz-mirror.example.com/video-1080p-av1.m4s?deadline=1800000000\",\"bandwidth\":2200000,\"mimeType\":\"video/mp4\",\"codecs\":\"av01.0.08M.08\",\"codecid\":13,\"width\":1920,\"height\":1080},{\"id\":80,\"baseUrl\":\"https://upos-sz-mirror.example.com/video-1080p.m4s?deadline=1800000000\",\"backupUrl\":[],\"bandwidth\":2500000,\"mimeType\":\"video/mp4\",\"codecs\":\"avc1.640032\",\"codecid\":7,\"width\":1920,\"height\":1080},{\"id\":64,\"baseUrl\":\"https://upos-sz-mirror.example.com/video-720p.m4s?deadline=1800000000\",\"bandwidth\":1200000,\"mimeType\":\"video/mp4\",\"codecs\":\"avc1.64001f\",\"codecid\":7,\"width\":1280,\"height\":720}],\"audio\":[{\"id\":30232,\"baseUrl\":\"https://upos-sz-mirror.example.com/audio-132k.m4s?deadline=1800000000\",\"bandwidth\":132000,\"mimeType\":\"audio/mp4\",\"codecs\":\"mp4a.40.2\"},{\"id\":30280,\"baseUrl\":\"https://upos-sz-mirror.example.com/audio-192k.m4s?deadline=1800000000\",\"bandwidth\":192000,\"mimeType\":\"audio/mp4\",\"codecs\":\"mp4a.40.2\"}]}}}"
+      }
+    }
+  ],
+  "expected": {
+    "resourceCount": 1,
+    "resourceUrls": [
+      "https://upos-sz-mirror.example.com/video-1080p.m4s?deadline=1800000000",
+      "https://upos-sz-mirror.example.com/audio-192k.m4s?deadline=1800000000"
+    ],
+    "decision": "continue"
+  }
+}
