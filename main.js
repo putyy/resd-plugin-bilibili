@@ -120,15 +120,36 @@ function groupKey(bvid, cid) {
   return "bilibili:" + bvid + ":" + String(cid);
 }
 
+function mediaUrlRank(rawUrl) {
+  var match = /^https?:\/\/([^\/:]+)(?::([0-9]+))?/i.exec(String(rawUrl || ""));
+  if (!match) return 0;
+  var host = match[1].toLowerCase();
+  var port = match[2] || "";
+  var isBilibiliCDN = /(^|\.)bilivideo\.(com|cn)$/.test(host);
+  var isMCDN = /(^|\.)mcdn\.bilivideo\.(com|cn)$/.test(host);
+  if (isBilibiliCDN && !isMCDN && (!port || port === "443")) return 3;
+  if (!isMCDN) return 2;
+  return 1;
+}
+
 function mediaUrl(value) {
   if (!value || typeof value !== "object") return "";
   var candidates = [value.baseUrl, value.base_url, value.url];
   var backups = value.backupUrl || value.backup_url;
   if (Array.isArray(backups)) candidates = candidates.concat(backups);
+
+  var selected = "";
+  var selectedRank = 0;
   for (var index = 0; index < candidates.length; index++) {
-    if (/^https?:\/\//i.test(stringValue(candidates[index]))) return candidates[index];
+    var candidate = stringValue(candidates[index]);
+    if (!/^https?:\/\//i.test(candidate)) continue;
+    var rank = mediaUrlRank(candidate);
+    if (!selected || rank > selectedRank) {
+      selected = candidate;
+      selectedRank = rank;
+    }
   }
-  return "";
+  return selected;
 }
 
 function qualityRank(id) {
