@@ -2,7 +2,7 @@
 
 [中文](README.md) | [English](README-EN.md)
 
-A Bilibili video detail page plugin for `res-downloader`.
+A Bilibili video detail page plugin for [res-downloader](https://github.com/putyy/res-downloader).
 
 ## Features
 

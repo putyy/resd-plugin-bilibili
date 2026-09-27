@@ -2,7 +2,7 @@
 
 [中文](README.md) | [English](README-EN.md)
 
-`res-downloader` 的 Bilibili 视频详情页识别插件。
+[res-downloader](https://github.com/putyy/res-downloader) 的 Bilibili 视频详情页识别插件。
 
 ## 功能
 
